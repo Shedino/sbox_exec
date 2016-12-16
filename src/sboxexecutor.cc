@@ -38,7 +38,7 @@ using namespace std;
 
 bool create_executor (lrs_srvs_exec::TSTCreateExecutor::Request  &req,
 		      lrs_srvs_exec::TSTCreateExecutor::Response &res ) {
-
+  ROS_INFO("create executor start.");
   boost::mutex::scoped_lock lock(mutex);
   ROS_INFO("quadexecutor: create_executor: %s %d - %d", req.ns.c_str(), req.id, req.run_prepare);
 
@@ -104,7 +104,7 @@ bool create_executor (lrs_srvs_exec::TSTCreateExecutor::Request  &req,
 }
 
 int main(int argc, char **argv) {
-
+  ROS_INFO("Executor main");
   ros::init(argc, argv, "sboxexecutor");
 
   ros::NodeHandle n;

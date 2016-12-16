@@ -15,7 +15,9 @@
 ////#include "../mavlink/mavlink_protobuf_manager.hpp"
 //#include "../mavlink/mavlink_helpers.h"
 
-#include "../mavlink/aslaradio/mavlink.h"
+//#include "../mavlink/aslaradio/mavlink.h"
+#include "sbox_msgs/Sbox_msg_commands.h"
+#include "sbox_msgs/Sbox_msg_status.h"
 
 //Altre librerie qua...
 

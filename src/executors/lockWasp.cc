@@ -61,19 +61,22 @@ void Exec::LockWasp::start () {
 		
 		ROS_INFO ("Exec::LockWasp: Execution unit: %s", tni.execution_ns.c_str());
 
-		mavlink_radio_t msg_cmd = {0,0,0,0,0,0,0}; //OK MINIMOSD
-		msg_cmd.noise = 1;
-		msg_cmd.rssi = pars;
+		
+		//INVIO TOPIC ROS SHERPABOX PER ESEGUIRE OPERAZIONE RICHIESTA
+		ros::Publisher cmds_pub;
 
-		mavlink_message_t toSend;
-		uint8_t txbuf[1024];
-		int psize = mavlink_msg_radio_encode(1,1,&toSend,&msg_cmd);
-		int sendsize = mavlink_msg_to_send_buffer(txbuf,&toSend);
-		for(int i = 0; i<sendsize;i++){
-			//SerialOSD.write(txbuf[i]);
-		}
-		//TODO: INVIO MESSAGGI MAVLINK A BASSO LIVELLO SHERPABOX PER ESEGUIRE OPERAZIONE RICHIESTA
+		ros::NodeHandle nh_;
+		cmds_pub = nh_.advertise < sbox_msgs::Sbox_msg_commands > ("mavros/sbox_msg_commands", 0);
+
+		sbox_msgs::Sbox_msg_commands cmds;
+		cmds.executeId = 1;
+
+		ROS_INFO("Publish new value!");
+		cmds.parameters = pars; 
+		cmds_pub.publish( cmds );
+
 		mission_succesfull=true;
+		//TODO: MONITORARE LO STATUS PER VEDERE QUANDO FINISCO!
 
 		//
 		// Replace the sleep with useful work.

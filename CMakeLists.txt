@@ -18,6 +18,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   roscpp
   wgs84_ned_lib
+  sbox_msgs
 )
 
 ## System dependencies are found with CMake's conventions
