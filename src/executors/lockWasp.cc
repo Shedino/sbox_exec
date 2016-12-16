@@ -63,17 +63,18 @@ void Exec::LockWasp::start () {
 
 		
 		//INVIO TOPIC ROS SHERPABOX PER ESEGUIRE OPERAZIONE RICHIESTA
-		ros::Publisher cmds_pub;
+		//ros::Publisher cmds_pub;
 
-		ros::NodeHandle nh_;
-		cmds_pub = nh_.advertise < sbox_msgs::Sbox_msg_commands > ("mavros/sbox_msg_commands", 0);
+		//ros::NodeHandle nh_;
+		//cmds_pub = global_nh->advertise < sbox_msgs::Sbox_msg_commands > ("mavros/sbox_msg_commands", 0);
 
 		sbox_msgs::Sbox_msg_commands cmds;
 		cmds.executeId = 1;
 
 		ROS_INFO("Publish new value!");
 		cmds.parameters = pars; 
-		cmds_pub.publish( cmds );
+		//cmds_pub.publish( cmds );
+		global_cmd_pub->publish(cmds);
 
 		mission_succesfull=true;
 		//TODO: MONITORARE LO STATUS PER VEDERE QUANDO FINISCO!

@@ -10,6 +10,8 @@
 
 #include "lrs_msgs_tst/ConfirmReq.h"
 //#include "mms_msgs/Cmd.h"
+#include "sbox_msgs/Sbox_msg_commands.h"
+#include "sbox_msgs/Sbox_msg_status.h"
 
 #include "lrs_srvs_exec/TSTCreateExecutor.h"
 
@@ -112,6 +114,9 @@ int main(int argc, char **argv) {
 
   ros::Publisher confirm_pub = n.advertise<lrs_msgs_tst::ConfirmReq>("confirm_request", 1, true); // queue size 1 and latched
   global_confirm_pub = &confirm_pub;
+
+  ros::Publisher cmd_pub = n.advertise<sbox_msgs::Sbox_msg_commands>("/mavros/sbox_msg_commands", 0); // command topic
+  global_cmd_pub = &cmd_pub;
 
   std::vector<ros::ServiceServer> services;
 
